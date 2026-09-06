@@ -51,10 +51,17 @@
   .btn-cta{height:56px;padding:0 32px;border-radius:28px;background:var(--cream);color:var(--ink);font-size:15px;letter-spacing:-0.2px;}
   .btn-cta:hover{background:#E7E5EA;}
 
-  .header{position:sticky;top:0;z-index:20;background:rgba(247,246,248,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
-  .header-inner{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .header{position:fixed;top:0;left:0;right:0;z-index:30;background:transparent;border-bottom:1px solid transparent;transition:background .25s ease,border-color .25s ease;}
+  .header.is-scrolled{background:rgba(247,246,248,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+  .header-inner{padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
   .header-nav{display:flex;align-items:center;gap:36px;}
   @media (max-width:760px){.header-nav{display:none;}}
+  .header .wordmark-text{color:var(--cream);transition:color .25s ease;}
+  .header.is-scrolled .wordmark-text{color:var(--ink);}
+  .header .navlink{color:rgba(247,246,248,.8);}
+  .header .navlink:hover{color:#FFFFFF;}
+  .header.is-scrolled .navlink{color:var(--muted);}
+  .header.is-scrolled .navlink:hover{color:var(--sage-deep);}
 
   .logo-mark{position:relative;}
   .logo-mark .ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,#4A4C58 0deg,#2C2E37 120deg,#1C1D23 232deg,#3E404B 330deg,#4A4C58 360deg);-webkit-mask-image:radial-gradient(closest-side,transparent 74%,#000 75%);mask-image:radial-gradient(closest-side,transparent 74%,#000 75%);}
@@ -65,8 +72,8 @@
   .hero-glow{position:absolute;inset:0;pointer-events:none;background:
     radial-gradient(45% 55% at 8% 6%, rgba(240,205,213,.16) 0%, rgba(240,205,213,0) 62%),
     radial-gradient(45% 55% at 96% 92%, rgba(214,235,219,.14) 0%, rgba(214,235,219,0) 62%);}
-  .hero-grid{padding:40px 56px 0;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;position:relative;}
-  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;padding:40px 28px 0;}}
+  .hero-grid{padding:88px 56px 0;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;position:relative;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;padding:84px 28px 0;}}
   .hero-copy{display:flex;flex-direction:column;gap:18px;}
   .eyebrow-pill{height:28px;padding:0 15px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;gap:8px;width:fit-content;}
   .hero-headline{font-size:clamp(32px,8vw,50px);font-weight:500;letter-spacing:-1.6px;line-height:1.1;color:var(--cream);margin:0;}
@@ -189,7 +196,7 @@
           <div class="ring"></div>
           <div class="dot" style="width:18px;height:18px;"></div>
         </div>
-        <span class="display" style="font-size:19px;font-weight:400;letter-spacing:-0.6px;">Obios</span>
+        <span class="display wordmark-text" style="font-size:19px;font-weight:400;letter-spacing:-0.6px;">Obios</span>
       </div>
       <nav class="header-nav">
         <a class="navlink" href="#fonctionnalites">Fonctionnalités</a>
@@ -549,6 +556,19 @@
   </footer>
 
 </div>
+
+<script>
+  (function(){
+    var header = document.querySelector('.header');
+    if (!header) return;
+    function onScroll(){
+      if (window.scrollY > 40) header.classList.add('is-scrolled');
+      else header.classList.remove('is-scrolled');
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
 
 </body>
 </html>
