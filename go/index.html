@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Obios — Télécharger</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:-apple-system,system-ui,sans-serif;background:#fff;color:#1a1a2e;text-align:center;padding:24px}
+  a{display:block;min-width:220px;padding:14px 22px;border-radius:14px;background:#1a1a2e;color:#fff;text-decoration:none;font-weight:600}
+  p{margin:0 0 8px;color:#555}
+</style>
+</head>
+<body>
+<p>Redirection vers le store…</p>
+<a id="ios" href="https://apps.apple.com/fr/app/id6802013466?ct=tiktok_bio">App Store</a>
+<a id="android" href="https://play.google.com/store/apps/details?id=com.obios.app&referrer=utm_source%3Dtiktok%26utm_medium%3Dbio">Google Play</a>
+<script>
+(function(){
+  var ua = navigator.userAgent || "";
+  var ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/i.test(ua);
+  if (ios) location.replace(document.getElementById("ios").href);
+  else if (android) location.replace(document.getElementById("android").href);
+})();
+</script>
+</body>
+</html>
