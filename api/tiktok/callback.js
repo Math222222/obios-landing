@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
       headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
       body: JSON.stringify(row),
     });
-    return page(s.ok ? 'Compte TikTok connecté ✅ Tu peux fermer cette page.' : 'Connecté à TikTok, mais enregistrement impossible.');
+    if (!s.ok) { const b = (await s.text()).slice(0, 200); console.error('supabase', s.status, b); return page('Connecté à TikTok, mais enregistrement impossible (' + s.status + ') ' + b.replace(/[<>&]/g, '')); }
+    return page('Compte TikTok connecté ✅ Tu peux fermer cette page.');
   } catch (e) { return page('Erreur serveur.'); }
 };
