@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST' || req.headers['x-admin-key'] !== process.env.TIKTOK_ADMIN_KEY || !process.env.TIKTOK_ADMIN_KEY) return res.status(401).json({ error: 'non autorisé' });
   try {
     const { title, description, images } = req.body || {};
-    if (!Array.isArray(images) || !images.length || images.some((u) => !String(u).startsWith('https://www.obios.fr/'))) return res.status(400).json({ error: 'images : URLs https://www.obios.fr/ requises' });
+    if (!Array.isArray(images) || !images.length || images.some((u) => !['https://www.obios.fr/', 'https://img.obios.fr/'].some((p) => String(u).startsWith(p)))) return res.status(400).json({ error: 'images : URLs https://www.obios.fr/ ou https://img.obios.fr/ requises' });
     const t = await token();
     const r = await fetch('https://open.tiktokapis.com/v2/post/publish/content/init/', {
       method: 'POST', headers: { Authorization: `Bearer ${t.access_token}`, 'Content-Type': 'application/json; charset=UTF-8' },
