@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     };
     const s = await fetch(`${process.env.SUPABASE_URL}/rest/v1/tiktok_tokens?on_conflict=open_id`, {
       method: 'POST',
-      headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
+      headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
       body: JSON.stringify(row),
     });
     return page(s.ok ? 'Compte TikTok connecté ✅ Tu peux fermer cette page.' : 'Connecté à TikTok, mais enregistrement impossible.');
